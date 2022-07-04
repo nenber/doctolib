@@ -3,11 +3,11 @@ from django.db import models
 
 class User(AbstractUser):
     pass
-    adress = models.TextField()
-    city = models.TextField()
-    zipCity = models.TextField()
-    phone =  models.TextField()
-    job = models.TextField(null=True)
+    adress = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    zipCity = models.CharField(max_length=10)
+    phone =  models.CharField(max_length=10)
+    job = models.CharField(max_length=100, null=True)
     descriptionDoctor = models.TextField(null=True)
     PATIENT = 'PATIENT'
     DOCTOR = 'DOCTOR'
