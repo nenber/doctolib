@@ -23,11 +23,12 @@
         <li>
           Docteur {{ user.last_name }} {{ user.first_name }} - {{ user.job }}
           <br>
+          {{user.id}}
           ville: {{ user.city }}
           <br>
           adresse: {{ user.adress }}, {{ user.zipCity}}
           <br>
-          <a href="{% url 'users_profile' %}">Voir la description</a>
+          <a href="{% url 'users_profile' user_id=user.id %}">Voir la description</a>
         </li>
       {% endfor %}
     {% else %}
