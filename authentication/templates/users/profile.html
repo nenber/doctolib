@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .bg {
+    width: 100%;
+    height: 100vh;
+    background: #22bff3;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+{% block content %}
+<h5>Profile page</h5>
+<div class="row my-3 p-3">
+  <h1>This is the profile page for {{user.username}}</h1>
+</div>
+{% endblock content %}
