@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% block content %}
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .bg {
+    width: 100%;
+    height: 100vh;
+    background: #22bff3;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+<div class="bg">
+  <h1>Résultats de la recherche</h1>
+  <ul>
+    {% if object_list %}
+      {% for user in object_list %}
+        <li>
+          Docteur {{ user.last_name }} {{ user.first_name }} - {{ user.job }}
+          <br>
+          ville: {{ user.city }}
+          <br>
+          adresse: {{ user.adress }}, {{ user.zipCity}}
+          <br>
+          <a href="{% url 'users_profile' %}">Voir la description</a>
+        </li>
+      {% endfor %}
+    {% else %}
+      <p>Pas de résultats pour votre recherche</p>
+    {% endif %}
+  </ul>
+</div>
+
+
+{% endblock content %}

@@ -20,14 +20,14 @@
     <div class="row">
       <div class="col-12">
         <div
-          class="card h-100 d-flex align-items-center justify-content-center"
-          style="width: 28rem; height: 28em"
+          class="card d-flex align-items-center justify-content-center"
+          style="width: 80%; height: 28em"
         >
           <div class="card-body">
             <h5 class="card-title">S'enregistrer</h5>
             <form method="post">
               {% csrf_token %}
-              <div>
+              <div class="row">
                 <span>Username:</span>
                 {{form.username}}
               </div>
