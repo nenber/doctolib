@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .bg {
+    width: 100%;
+    height: 100vh;
+    background: #22bff3;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<div class="bg">
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="card h-100 d-flex align-items-center justify-content-center"
+          style="width: 28rem; height: 28em"
+        >
+          <div class="card-body">
+            <h5 class="card-title">S'enregistrer</h5>
+            <form method="post">
+              {% csrf_token %}
+              <div>
+                <span>Username:</span>
+                {{form.username}}
+              </div>
+              <div>
+                <span>Email:</span>
+                {{form.email}}
+              </div>
+              <div>
+                <span>Mot de passe:</span>
+                {{form.password1}}
+                <small>
+                  {{form.password1.help_text}} Required. 150 characters or
+                  fewer. Letters, digits and @/./+/-/_ only.
+                </small>
+              </div>
+              <div>
+                <span>Confimez votre mot de passe:</span>
+                {{form.password2}}
+              </div>
+              <div>
+                <span>Prénom:</span>
+                {{form.first_name}}
+              </div>
+              <div>
+                <span>Nom de famille:</span>
+                {{form.last_name}}
+              </div>
+              <div>
+                <span>Téléphone:</span>
+                {{form.phone}}
+              </div>
+              <div>
+                <span>Adresse:</span>
+                {{form.adress}}
+              </div>
+              <div>
+                <span>Ville:</span>
+                {{form.city}}
+              </div>
+              <div>
+                <span>Code postal:</span>
+                {{form.zipCity}}
+              </div>
+              <div>
+                <span> Vous êtes: </span>
+                {{form.role}}
+              </div>
+              <input type="submit" value="Register" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="{% url 'login' %}">Back to login</a>
+<a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}

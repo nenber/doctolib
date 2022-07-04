@@ -1,0 +1,39 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %} {% block content %}
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .bg {
+    width: 100%;
+    height: 100vh;
+    background: #22bff3;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<div class="bg">
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="card h-100 d-flex align-items-center justify-content-center"
+          style="width: 28rem; height: 28em"
+        >
+          <div class="card-body">
+            <h5 class="card-title">Se connecter</h5>
+            <form method="post">
+              {% csrf_token %} {{ form.as_p }}
+              <button type="submit">Log In</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

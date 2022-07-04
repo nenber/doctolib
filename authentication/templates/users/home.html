@@ -1,0 +1,127 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %} {% block content %}
+<style>
+  header {
+    width: 100%;
+    height: 100vh;
+    /* background-image: url(../assets/img/header-homepage.jpg); */
+    background: #22bff3;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .header-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .header-wrapper .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    color: white;
+    flex-grow: 2;
+    margin-bottom: 200px;
+  }
+  .header-wrapper .content-wrapper .main-title {
+    margin-bottom: 16px;
+  }
+  #resume {
+    padding: 10px 0;
+    color: rgb(0, 0, 0);
+  }
+
+  .card {
+    max-width: 250px;
+  }
+  img {
+    width: 190px;
+  }
+</style>
+
+<div>
+  <header class="overflow-hidden">
+    <div class="top-gradient"></div>
+    <div class="container header-wrapper">
+      <div class="content-wrapper">
+        <h1 class="main-title">
+          Réserver une consultation chez un professionnel de santé
+        </h1>
+        <div class=""></div>
+        <div class="separator"></div>
+        <a>
+          <button class="buttonCustom">
+            <div class="height-fix">Rechercher</div>
+          </button>
+        </a>
+      </div>
+    </div>
+  </header>
+  <section id="resume">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-center mb-10">
+            Pourquoi prendre rendez-vous avec Doctolib ?
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="card">
+            <img
+              src="https://www.doctolib.fr/webpack/a5e17c72213e53ab835e.png"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">
+                Accédez aux disponibilités de dizaines de milliers de
+                professionnels de santé.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card">
+            <img
+              src="https://www.doctolib.fr/webpack/4aa6dbff428e055632e5.png"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">
+                With supporting text below as a natural lead-in to additional
+                content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card">
+            <img
+              src="https://www.doctolib.fr/webpack/7062ba83984198463022.png"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">
+                With supporting text below as a natural lead-in to additional
+                content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}
