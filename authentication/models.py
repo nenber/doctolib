@@ -7,8 +7,8 @@ class User(AbstractUser):
     city = models.TextField()
     zipCity = models.TextField()
     phone =  models.TextField()
-    job = models.TextField()
-    descriptionDoctor = models.TextField()
+    job = models.TextField(null=True)
+    descriptionDoctor = models.TextField(null=True)
     PATIENT = 'PATIENT'
     DOCTOR = 'DOCTOR'
 
