@@ -28,7 +28,8 @@
           <br>
           adresse: {{ user.adress }}, {{ user.zipCity}}
           <br>
-          <a href="{% url 'users_profile' user_id=user.id %}">Voir la description</a>
+          <a class="btn btn-primary" 
+          href="{% url 'users_profile' user_id=user.id %}">Voir la description</a>
         </li>
       {% endfor %}
     {% else %}

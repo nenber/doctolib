@@ -31,7 +31,8 @@
   <div> Télephone: {{profile_owner.username}}</div>
   {% if "DOCTOR" == profile_owner.role %}
     <div> Prestation: {{profile_owner.description}}</div>
-    <a href="{% url 'doctor-timeslot' doctor_id=profile_owner.id %}">Voir les créneaux disponibles</a>
+    <a class="btn btn-primary" 
+    href="{% url 'doctor-timeslot' doctor_id=profile_owner.id %}">Voir les créneaux disponibles</a>
   {% endif %}
 </div>
 
