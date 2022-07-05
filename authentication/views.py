@@ -32,11 +32,11 @@ def signup_page(request):
     return render(request, 'users/signup.html', context={'form': form})
 
 def complete_profile_doctor(request):
-    form = forms.CompleteProfileDoctor()
+    current_user = request.user
+    form = forms.CompleteProfileDoctor(request.POST or None, instance=current_user)
     if request.method == 'POST':
-        form = forms.CompleteProfileDoctor(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             return redirect(settings.LOGIN_REDIRECT_URL)
             # auto-login user
     return render(request, 'doctor/complete_profile_doctor.html', context={'form': form})
@@ -59,10 +59,6 @@ def edit_profile(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            # Change password
-            new_password = form.cleaned_data.get('password')
-            if new_password:
-                current_user.set_password(new_password)
     return render(request, 'users/edit_profile.html', {'form': form})
 
 class SearchResultsView(ListView):

@@ -9,8 +9,8 @@ class SignupForm(UserCreationForm):
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name', 'adress', 'phone', 'city', 'zipCity', 'role')
 
-class CompleteProfileDoctor(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
+class CompleteProfileDoctor(forms.ModelForm):
+    class Meta():
         model = get_user_model()
         fields = ('job', 'descriptionDoctor')
 class EditProfile(forms.ModelForm):
