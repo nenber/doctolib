@@ -21,3 +21,4 @@ class Reservation(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+    slotStart = models.DateTimeField(null=True)

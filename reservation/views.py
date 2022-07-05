@@ -108,6 +108,6 @@ def my_reservation(request):
     context ={}
 
 
-    context["dataset"] = Reservation.objects.filter(patient = user).order_by('children__slotStart')
+    context["dataset"] = Reservation.objects.filter(patient = user).order_by('slot__slotStart', 'slotStart')
 
     return render(request, "reservation/my_reservation.html", context)
