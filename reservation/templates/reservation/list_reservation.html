@@ -23,10 +23,16 @@
         <div class="main">
           {% for data in dataset %} description : {{ data.description }}<br />
           patient : {{ data.patient }}<br />
-          Disponibilité : {{ data.slot}}
+          Date : {{ data.slot.id}}
           <br />
           <hr />
-
+          <a
+            type="button"
+            class="btn btn-danger"
+            href="{% url 'delete-reservation' data.slot.id %}"
+          >
+            Annuler
+          </a>
           {% endfor %}
         </div>
       </div>
