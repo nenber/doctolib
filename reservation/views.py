@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.conf import settings
 from django.contrib.auth import login
 from django.shortcuts import render
@@ -13,6 +14,7 @@ from authentication.models import User
 from django.template import RequestContext
 
 from . import forms
+import reservation
 # Create your views here.
 def only_doctor(user):
     return user.role.endswith('DOCTOR')
@@ -85,3 +87,15 @@ def create_reservation(request, doctor_id, patient_id, slot_id):
     if form.is_valid():
         form.save()
     return render(request, "reservation/reservation.html", context)
+
+@user_passes_test(only_doctor)
+def delete_reservation(request, reservation_id):
+    reservation = Reservation.objects.get(pk=reservation_id)
+    reservation.delete()
+    return redirect('list-reservation')
+
+@user_passes_test(only_doctor)
+def delete_timeslot(request, timeslot_id):
+    timeSlot = TimeSlot.objects.get(pk=timeslot_id)
+    timeSlot.delete()
+    return redirect('list-timeslot')
