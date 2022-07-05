@@ -14,8 +14,7 @@
     flex-direction: column;
   }
 </style>
-{% block content %}
-
+{% block content %} {% if "DOCTOR" == user.role %}
 <div class="bg">
   <div class="container d-flex align-items-center justify-content-center">
     <div class="row">
@@ -38,4 +37,4 @@
     </div>
   </div>
 </div>
-{% endblock content %}
+{% endif %} {% endblock content %}

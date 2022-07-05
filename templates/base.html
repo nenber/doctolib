@@ -44,9 +44,17 @@
                 Hi {{ user.username }}!
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if "DOCTOR" == user.role %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'backoffice' %}"
+                    >Mon dashboard</a
+                  >
+                </li>
+                {% else %}
                 <li>
                   <a class="dropdown-item" href="#">Voir mes rendez-vous</a>
                 </li>
+                {% endif %}
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <a class="dropdown-item" href="{% url 'logout' %}"
