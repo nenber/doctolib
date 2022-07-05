@@ -26,7 +26,11 @@
           Fin : {{ data.slotStart }}<br />
           Disponibilité : {{ data.available}}
           <br />
-          <a href="{% url 'create_reservation' patient_id=user.id doctor_id=doctor.id slot_id=data.id %}">Reserver</a>
+            <a class="btn btn-primary"
+            href="{% url 'create_reservation' patient_id=user.id doctor_id=doctor.id slot_id=data.id %}"
+          >
+          Reserver
+          </a>
           <hr />
           
           {% endfor %}

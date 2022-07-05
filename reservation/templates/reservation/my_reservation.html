@@ -36,6 +36,13 @@
           >
             Annuler
           </a>
+          <a 
+            type="button"
+            class="btn btn-primary"
+            href="{% url 'doctor-timeslot' doctor_id=data.doctor.id %}"
+          >
+            Reprendre un rendez-vous
+          </a>
           <hr />
           {% endfor %}
         </div>
