@@ -31,3 +31,6 @@ def list_timeslot(request):
     context["dataset"] = TimeSlot.objects.all()
          
     return render(request, "timeslot/list_timeslot.html", context)
+
+def backoffice(request):       
+    return render(request, "backoffice.html")
