@@ -6,8 +6,8 @@
   }
   .bg {
     width: 100%;
-    height: 100vh;
     background: #22bff3;
+    height: 100vh;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -57,7 +57,7 @@
               </div>
               <div>
                 <span>Téléphone:</span>
-                {{form.phone}}
+                <small> {{form.phone}} </small>
               </div>
               <div>
                 <span>Adresse:</span>
@@ -83,7 +83,4 @@
     </div>
   </div>
 </div>
-
-<a href="{% url 'login' %}">Back to login</a>
-<a href="{% url 'home' %}">Back to Home</a>
 {% endblock %}
