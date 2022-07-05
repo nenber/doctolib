@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .bg {
+    width: 100%;
+    background: #22bff3;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<div class="bg">
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="card d-flex align-items-center justify-content-center"
+          style="width: 80%; height: 28em"
+        >
+          <div class="card-body">
+            <h5 class="card-title">Compléter votre profil</h5>
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <span>Votre description</span>
+                {{form.descriptionDoctor}}
+              </div>
+              <div>
+                <span>Spécialité</span>
+                {{form.job}}
+              </div>
+              <input type="submit" value="Register" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

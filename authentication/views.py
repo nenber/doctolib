@@ -25,8 +25,21 @@ def signup_page(request):
             user = form.save()
             # auto-login user
             login(request, user)
-            return redirect(settings.LOGIN_REDIRECT_URL)
+            if request.user.role == 'PATIENT': 
+                return redirect(settings.LOGIN_REDIRECT_URL)
+            if request.user.role == 'DOCTOR': 
+                return redirect('http://127.0.0.1:8000/complete-profile/')
     return render(request, 'users/signup.html', context={'form': form})
+
+def complete_profile_doctor(request):
+    form = forms.CompleteProfileDoctor()
+    if request.method == 'POST':
+        form = forms.CompleteProfileDoctor(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect(settings.LOGIN_REDIRECT_URL)
+            # auto-login user
+    return render(request, 'doctor/complete_profile_doctor.html', context={'form': form})
 
 @login_required
 def profile(request, user_id=None):
