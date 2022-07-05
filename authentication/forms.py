@@ -1,6 +1,7 @@
 # authentication/forms.py
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 
 class SignupForm(UserCreationForm):
@@ -8,7 +9,11 @@ class SignupForm(UserCreationForm):
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name', 'adress', 'phone', 'city', 'zipCity', 'role')
 
-class CompleteProfileDoctor(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
+class CompleteProfileDoctor(forms.ModelForm):
+    class Meta():
         model = get_user_model()
         fields = ('job', 'descriptionDoctor')
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('email', 'first_name', 'last_name', 'adress', 'phone', 'city', 'zipCity')

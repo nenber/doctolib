@@ -32,11 +32,11 @@ def signup_page(request):
     return render(request, 'users/signup.html', context={'form': form})
 
 def complete_profile_doctor(request):
-    form = forms.CompleteProfileDoctor()
+    current_user = request.user
+    form = forms.CompleteProfileDoctor(request.POST or None, instance=current_user)
     if request.method == 'POST':
-        form = forms.CompleteProfileDoctor(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             return redirect(settings.LOGIN_REDIRECT_URL)
             # auto-login user
     return render(request, 'doctor/complete_profile_doctor.html', context={'form': form})
@@ -51,6 +51,15 @@ def profile(request, user_id=None):
         'profile_owner': profile_owner
     }
     return render(request, 'users/profile.html', args)
+
+@login_required
+def edit_profile(request):
+    current_user = request.user
+    form = forms.EditProfile(request.POST or None, instance=current_user)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+    return render(request, 'users/edit_profile.html', {'form': form})
 
 class SearchResultsView(ListView):
     model = User
