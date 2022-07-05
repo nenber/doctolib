@@ -6,12 +6,12 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Reservation, TimeSlot
-from .forms import CreateTimeSlot
+from .forms import CreateReservation, CreateTimeSlot
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
 from authentication.models import User
-
+from django.template import RequestContext
 
 from . import forms
 import reservation
@@ -49,6 +49,7 @@ def doctor_timeslot(request, doctor_id=None):
     context ={}
     context["doctor"] = doctor
     context["dataset"] = TimeSlot.objects.filter(doctor = doctor).order_by('slotStart')
+    context["cuurent_user"] = request.user
     return render(request, "timeslot/doctor_timeslot.html", context)
 
 @user_passes_test(only_doctor)
@@ -67,6 +68,28 @@ def backoffice(request):
     if request.user.role != 'DOCTOR':       
         return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, "backoffice.html")
+
+@login_required()
+def create_reservation(request, doctor_id, patient_id, slot_id):
+    patient = User.objects.get(pk=patient_id)
+    doctor = User.objects.get(pk=doctor_id)
+    slot = TimeSlot.objects.get(pk=slot_id)
+    context = {
+        'patient': patient,
+        'doctor': doctor,
+        'slot': slot
+        }
+    form = CreateReservation(request.POST or None, initial={
+        'doctor': doctor,
+        'patient': patient,
+        'slot': slot
+        })
+    context['form'] = form
+    if form.is_valid():
+        form.save()
+    slot.available = False
+    slot.save()
+    return render(request, "reservation/reservation.html", context)
 
 @user_passes_test(only_doctor)
 def delete_reservation(request, reservation_id):

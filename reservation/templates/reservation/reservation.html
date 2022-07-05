@@ -15,21 +15,20 @@
   }
 </style>
 {% block content %}
-
 <div class="bg">
   <div class="container d-flex align-items-center justify-content-center">
     <div class="row">
       <div class="col-12">
-        <h3>Crénaux de Docteur {{doctor.first_name}} {{doctor.last_name}}</h3>
+        <h3>La reservation avec Docteur {{doctor.first_name}} {{doctor.last_name}}</h3>
         <div class="main">
-          {% for data in dataset %} Début : {{ data.slotEnd }}<br />
-          Fin : {{ data.slotStart }}<br />
-          Disponibilité : {{ data.available}}
+          De {{slot.slotStart}} à {{slot.slotEnd}}
           <br />
-          <a href="{% url 'create_reservation' patient_id=user.id doctor_id=doctor.id slot_id=data.id %}">Reserver</a>
           <hr />
-          
-          {% endfor %}
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Réserver</button>
+          </form>
         </div>
       </div>
     </div>
