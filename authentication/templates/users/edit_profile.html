@@ -20,7 +20,40 @@
   <h5>Modification du profile {{user.first_name}} {{user.last_name}}</h5>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
+        <div>
+          <span>Prénom:</span>
+          {{form.first_name}}
+        </div>
+        <div>
+          <span>Nom de famille:</span>
+          {{form.last_name}}
+        </div>
+        <div>
+          <span>Téléphone:</span>
+          <small> {{form.phone}} </small>
+        </div>
+        <div>
+          <span>Adresse:</span>
+          {{form.adress}}
+        </div>
+        <div>
+          <span>Ville:</span>
+          {{form.city}}
+        </div>
+        <div>
+          <span>Code postal:</span>
+          {{form.zipCity}}
+        </div>
+        {% if "DOCTOR" == user.role %}
+        <div>
+          <span>Mes prestations:</span>
+          {{form.descriptionDoctor}}
+        </div>
+        <div>
+          <span>Ma spécialité:</span>
+          {{form.job}}
+        </div>
+        {% endif %}
         <button type="submit">Submit</button>
     </form>
     <br>
