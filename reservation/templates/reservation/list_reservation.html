@@ -19,24 +19,15 @@
   <div class="container d-flex align-items-center justify-content-center">
     <div class="row">
       <div class="col-12">
-        <h3 class="mb-5">Bonjour Dr.{{ user.username }}</h3>
-        <h4>Bienvenu sur votre backoffice</h4>
-        <div class="slotTime">
-          <a class="nav-link" href="{% url 'create-timeslot' %}"
-            >Ajouter un créneau ></a
-          >
+        <h3>Mon agenda</h3>
+        <div class="main">
+          {% for data in dataset %} description : {{ data.description }}<br />
+          patient : {{ data.patient }}<br />
+          Disponibilité : {{ data.slot}}
           <br />
           <hr />
-          <a class="nav-link" href="{% url 'list-timeslot' %}"
-            >Voir mes créneaux ></a
-          >
-          <br />
-          <hr />
-          <a class="nav-link" href="{% url 'list-reservation' %}"
-            >Voir mon agenda ></a
-          >
-          <br />
-          <hr />
+
+          {% endfor %}
         </div>
       </div>
     </div>
