@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.conf import settings
 from django.contrib.auth import login
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 
 from . import forms
+import reservation
 # Create your views here.
 def only_doctor(user):
      return user.role.endswith('DOCTOR')
@@ -54,3 +56,19 @@ def backoffice(request):
     if request.user.role != 'DOCTOR':       
         return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, "backoffice.html")
+
+@user_passes_test(only_doctor)
+def delete_reservation(request, reservation_id):
+    reservation = Reservation.objects.get(pk=reservation_id)
+    reservation.delete()
+    return redirect('list-reservation')
+    # context ={}
+    # # fetch the object related to passed id
+    # obj = get_object_or_404(Reservation, id = id)
+ 
+ 
+    # if request.method =="POST":
+    #     obj.delete()
+    #     return HttpResponseRedirect("/")
+ 
+    # return render(request, "delete_reservation.html", context)

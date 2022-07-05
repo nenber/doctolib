@@ -20,21 +20,12 @@
     <div class="row">
       <div class="col-12">
         <h3>Mon agenda</h3>
-        <div class="main">
-          {% for data in dataset %} description : {{ data.description }}<br />
-          patient : {{ data.patient }}<br />
-          Date : {{ data.slot.id}}
-          <br />
-          <hr />
-          <a
-            type="button"
-            class="btn btn-danger"
-            href="{% url 'delete-reservation' data.slot.id %}"
-          >
-            Annuler
-          </a>
-          {% endfor %}
-        </div>
+        <form method="POST">
+          <!-- Security token by Django -->
+          {% csrf_token %} Etes vous sûr de vouloir supprimer de rendez-vous ?
+          <input type="submit" value="Yes" />
+          <a href="/">Annuler </a>
+        </form>
       </div>
     </div>
   </div>
