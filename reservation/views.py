@@ -13,23 +13,25 @@ def create_timeslot(request):
     # dictionary for initial data with
     # field names as keys
     context ={}
- 
+
     # add the dictionary during initialization
     form = CreateTimeSlot(request.POST or None)
     if form.is_valid():
         form.save()
-         
-    context['form']= form
+
+    current_doctor = request.user
+    context['form'] = form
+    context['current_doctor'] = current_doctor
     return render(request, "timeslot/create_timeslot.html", context)
 
 def list_timeslot(request):
     # dictionary for initial data with
     # field names as keys
     context ={}
- 
+
     # add the dictionary during initialization
     context["dataset"] = TimeSlot.objects.all()
-         
+
     return render(request, "timeslot/list_timeslot.html", context)
 
 def backoffice(request):       

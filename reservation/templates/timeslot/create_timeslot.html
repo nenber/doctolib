@@ -26,15 +26,15 @@
         >
           <div class="card-body">
             <h5 class="card-title">Ajouter un créneau</h5>
-
+              {{current_doctor.first_name}}
             <form method="POST" enctype="multipart/form-data">
               <!-- Security token -->
               {% csrf_token %}
 
               <!-- Using the formset -->
               {{ form.as_p }}
-
               <input type="submit" value="Submit" />
+              
             </form>
           </div>
         </div>
