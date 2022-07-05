@@ -86,6 +86,8 @@ def create_reservation(request, doctor_id, patient_id, slot_id):
     context['form'] = form
     if form.is_valid():
         form.save()
+    slot.available = False
+    slot.save()
     return render(request, "reservation/reservation.html", context)
 
 @user_passes_test(only_doctor)
