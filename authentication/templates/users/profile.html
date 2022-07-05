@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+{% block content %}
 <style>
   html,
   body {
@@ -14,9 +15,24 @@
     flex-direction: column;
   }
 </style>
-{% block content %}
-<h5>Profile page</h5>
-<div class="row my-3 p-3">
-  <h5>This is the profile page for {{user.username}}</h5>
+
+<div class="bg">
+  <div class="row my-3 p-3">
+    <h5>
+    {% if "DOCTOR" == profile_owner.role %}
+      Profile de Docteur
+    {% else %} Profile de 
+    {% endif %}
+    {{profile_owner.last_name}} {{profile_owner.first_name}}</h5>
+  </div>
+  <div> Profession: {{profile_owner.job}}</div>
+  <div> Adresse: {{profile_owner.adress}}</div>
+  <div> Ville: {{profile_owner.city}}</div>
+  <div> Télephone: {{profile_owner.username}}</div>
+  {% if "DOCTOR" == profile_owner.role %}
+    <div> Prestation: {{profile_owner.description}}</div>
+    <a href="#">Voir les créneaux disponibles</a>
+  {% endif %}
 </div>
+
 {% endblock content %}

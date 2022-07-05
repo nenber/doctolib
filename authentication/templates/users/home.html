@@ -52,9 +52,11 @@
         </h1>
         <div class=""></div>
         <div class="separator"></div>
-        <a>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </a>
+        <form action="{% url 'search_results' %}" method="get">
+          <input name="q" type="text" placeholder="Search...">
+          <input class="btn btn-primary" type="submit" value="Rechercher" />
+          </a>
+        </form>
       </div>
     </div>
   </header>

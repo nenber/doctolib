@@ -1,9 +1,13 @@
+from ast import arg
 from django.conf import settings
 from django.contrib.auth import login
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.views.generic import ListView
+
+from authentication.models import User
 
 from . import forms
 
@@ -12,6 +16,8 @@ def home(request):
     return render(request,"users/home.html")
 
 def signup_page(request):
+    if request.user.is_authenticated:
+        return redirect(settings.LOGIN_REDIRECT_URL)
     form = forms.SignupForm()
     if request.method == 'POST':
         form = forms.SignupForm(request.POST)
@@ -23,5 +29,24 @@ def signup_page(request):
     return render(request, 'users/signup.html', context={'form': form})
 
 @login_required
-def profile(request):
-    return render(request, 'users/profile.html')
+def profile(request, user_id=None):
+    if user_id:
+        profile_owner = get_object_or_404(User, id=user_id)
+    else:
+        profile_owner = request.user
+    args = {
+        'profile_owner': profile_owner
+    }
+    return render(request, 'users/profile.html', args)
+
+class SearchResultsView(ListView):
+    model = User
+    template_name = 'users/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        return User.objects\
+        .filter(role__icontains="doctor")\
+        .filter(
+            Q(city__icontains=query) | Q(job__icontains=query)
+        )
