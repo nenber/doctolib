@@ -27,6 +27,7 @@ def create_timeslot(request):
     form = CreateTimeSlot(request.POST or None, initial={'doctor': request.user})
     if form.is_valid():
         form.save()
+        return redirect('list-timeslot')
 
     context['form'] = form
     return render(request, "timeslot/create_timeslot.html", context)
@@ -78,3 +79,12 @@ def delete_timeslot(request, timeslot_id):
     timeSlot = TimeSlot.objects.get(pk=timeslot_id)
     timeSlot.delete()
     return redirect('list-timeslot')
+
+def my_reservation(request):
+    user = request.user
+    context ={}
+
+
+    context["dataset"] = Reservation.objects.filter(patient = user).order_by('children__slotStart')
+
+    return render(request, "reservation/my_reservation.html", context)
