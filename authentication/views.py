@@ -31,6 +31,7 @@ def signup_page(request):
                 return redirect('http://127.0.0.1:8000/complete-profile/')
     return render(request, 'users/signup.html', context={'form': form})
 
+@login_required
 def complete_profile_doctor(request):
     form = forms.CompleteProfileDoctor()
     if request.method == 'POST':
