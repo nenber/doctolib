@@ -4,25 +4,26 @@ from django.conf import settings
 from django.contrib.auth import login
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Reservation, TimeSlot
 from .forms import CreateTimeSlot
+from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.models import User
+from authentication.models import User
+
 
 from . import forms
 import reservation
 # Create your views here.
 def only_doctor(user):
-     return user.role.endswith('DOCTOR')
+    return user.role.endswith('DOCTOR')
 
 @user_passes_test(only_doctor)
 def create_timeslot(request):
     context ={}
     if request.user.role != 'DOCTOR':
         return redirect(settings.LOGIN_REDIRECT_URL)
-    doctor = request.user.username
     form = CreateTimeSlot(request.POST or None, initial={'doctor': request.user})
     if form.is_valid():
         form.save()
@@ -30,6 +31,7 @@ def create_timeslot(request):
     context['form'] = form
     return render(request, "timeslot/create_timeslot.html", context)
 
+@login_required
 @user_passes_test(only_doctor)
 def list_timeslot(request):
     user = request.user
@@ -39,6 +41,14 @@ def list_timeslot(request):
     context["dataset"] = TimeSlot.objects.filter(doctor = user).order_by('slotStart')
 
     return render(request, "timeslot/list_timeslot.html", context)
+
+@login_required
+def doctor_timeslot(request, doctor_id=None):
+    doctor = get_object_or_404(User, id=doctor_id)
+    context ={}
+    context["doctor"] = doctor
+    context["dataset"] = TimeSlot.objects.filter(doctor = doctor).order_by('slotStart')
+    return render(request, "timeslot/doctor_timeslot.html", context)
 
 @user_passes_test(only_doctor)
 def list_reservation(request):
