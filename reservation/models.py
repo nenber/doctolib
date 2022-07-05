@@ -5,8 +5,8 @@ from authentication.models import User
 
 # Create your models here.
 class TimeSlot(models.Model): 
-    slotStart = models.DateField()
-    slotEnd = models.DateField()
+    slotStart = models.DateTimeField()
+    slotEnd = models.DateTimeField()
     # ManyToOne
     doctor = models.ForeignKey(User, on_delete=models.CASCADE)
     available = models.BooleanField()

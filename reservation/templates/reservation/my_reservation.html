@@ -14,22 +14,21 @@
     flex-direction: column;
   }
 </style>
-{% block content %} {% if "DOCTOR" == user.role %}
+{% block content %} {% if "PATIENT" == user.role %}
 <div class="bg">
   <div class="container d-flex align-items-center justify-content-center">
     <div class="row">
       <div class="col-12">
         <h3>Mon agenda</h3>
         <div class="main">
-          {% for data in dataset %} description : {{ data.description }}<br />
-          patient : {{ data.patient }}<br />
+          <h3>Mes rdv à venir</h3>
+          {% for data in dataset %} doctor : {{ data.doctor }}<br />
+          description : {{ data.description}}
           <br />
           Date de début : {{ data.slot.slotStart}}
           <br />
           Date de fin : {{ data.slot.slotEnd}}
           <br />
-          <br />
-
           <a
             type="button"
             class="btn btn-danger"

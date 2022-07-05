@@ -52,7 +52,9 @@
                 </li>
                 {% else %}
                 <li>
-                  <a class="dropdown-item" href="#">Voir mes rendez-vous</a>
+                  <a class="dropdown-item" href="{% url 'my-reservation' %}"
+                    >Voir mes rendez-vous</a
+                  >
                 </li>
                 {% endif %}
                 <li><hr class="dropdown-divider" /></li>
