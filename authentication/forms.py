@@ -16,4 +16,4 @@ class CompleteProfileDoctor(forms.ModelForm):
 class EditProfile(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('email', 'first_name', 'last_name', 'adress', 'phone', 'city', 'zipCity')
+        fields = ('email', 'first_name', 'last_name', 'adress', 'phone', 'city', 'zipCity', 'descriptionDoctor', 'job')
