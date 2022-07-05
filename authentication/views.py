@@ -52,6 +52,19 @@ def profile(request, user_id=None):
     }
     return render(request, 'users/profile.html', args)
 
+@login_required
+def edit_profile(request):
+    current_user = request.user
+    form = forms.EditProfile(request.POST or None, instance=current_user)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            # Change password
+            new_password = form.cleaned_data.get('password')
+            if new_password:
+                current_user.set_password(new_password)
+    return render(request, 'users/edit_profile.html', {'form': form})
+
 class SearchResultsView(ListView):
     model = User
     template_name = 'users/search_results.html'
