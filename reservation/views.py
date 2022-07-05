@@ -20,8 +20,8 @@ def create_timeslot(request):
     context ={}
     if request.user.role != 'DOCTOR':
         return redirect(settings.LOGIN_REDIRECT_URL)
-
-    form = CreateTimeSlot(request.POST or None)
+    doctor = request.user.username
+    form = CreateTimeSlot(request.POST or None, initial={'doctor': request.user})
     if form.is_valid():
         form.save()
 
