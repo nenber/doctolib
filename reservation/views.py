@@ -91,7 +91,6 @@ def create_reservation(request, doctor_id, patient_id, slot_id):
     slot.save()
     return render(request, "reservation/reservation.html", context)
 
-@user_passes_test(only_doctor)
 def delete_reservation(request, reservation_id):
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.delete()
