@@ -94,7 +94,10 @@ def create_reservation(request, doctor_id, patient_id, slot_id):
 def delete_reservation(request, reservation_id):
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.delete()
-    return redirect('list-reservation')
+    if request.user.role == 'DOCTOR':
+        return redirect('list-reservation')
+    if request.user.role == 'PATIENT':
+        return redirect('my-reservation')
 
 @user_passes_test(only_doctor)
 def delete_timeslot(request, timeslot_id):
