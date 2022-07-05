@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .bg {
+    width: 100%;
+    height: 100vh;
+    background: #22bff3;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+{% block content %}
+
+<div class="bg">
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="card h-100 d-flex align-items-center justify-content-center"
+          style="width: 48rem; height: 48em"
+        >
+          <div class="card-body">
+            <h5 class="card-title">Ajouter un créneau</h5>
+
+            <form method="POST" enctype="multipart/form-data">
+              <!-- Security token -->
+              {% csrf_token %}
+
+              <!-- Using the formset -->
+              {{ form.as_p }}
+
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
