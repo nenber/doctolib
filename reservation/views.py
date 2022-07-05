@@ -62,13 +62,9 @@ def delete_reservation(request, reservation_id):
     reservation = Reservation.objects.get(pk=reservation_id)
     reservation.delete()
     return redirect('list-reservation')
-    # context ={}
-    # # fetch the object related to passed id
-    # obj = get_object_or_404(Reservation, id = id)
- 
- 
-    # if request.method =="POST":
-    #     obj.delete()
-    #     return HttpResponseRedirect("/")
- 
-    # return render(request, "delete_reservation.html", context)
+
+@user_passes_test(only_doctor)
+def delete_timeslot(request, timeslot_id):
+    timeSlot = TimeSlot.objects.get(pk=timeslot_id)
+    timeSlot.delete()
+    return redirect('list-timeslot')
